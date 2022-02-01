@@ -1,0 +1,15 @@
+:host {
+  all: initial;
+  font: 20px 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+}
+li + li {
+  margin-left: 2rem;
+}
