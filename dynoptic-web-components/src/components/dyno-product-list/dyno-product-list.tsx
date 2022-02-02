@@ -1,4 +1,32 @@
 import { Component, Fragment, h, Prop } from '@stencil/core';
+import { request, gql } from 'graphql-request';
+
+const LIST_ALL_PRODUCTS_QUERY = gql`
+  query ListAllProducts {
+    listAllProducts {
+      tenants {
+        products {
+          id
+          specification {
+            commerce {
+              pricing {
+                amount
+              }
+            }
+          }
+          media {
+            id
+            asset {
+              id
+              url
+            }
+            tags
+          }
+        }
+      }
+    }
+  }
+`;
 
 @Component({
   tag: 'dyno-product-list',
@@ -11,27 +39,46 @@ export class DynoProductList {
   @Prop() response: any;
 
   async componentWillLoad() {
-    const url = process.env.API_URL;
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: `
-          query ListProducts {
-            products {
-              texts {
-                title
-                description
-              }
-            }
-          }
-        `,
-      }),
+    request('https://dev.dynoptic.shop/api/graphql', LIST_ALL_PRODUCTS_QUERY).then(data => {
+      console.log(data);
     });
-    const data = await response.json();
-    return (this.products = data);
+    // const url = process.env.API_URL;
+    // const response = await fetch(url, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     query: `
+    //       query ListProducts {
+    //         listAllProducts {
+    //           tenants {
+    //             products {
+    //               id
+    //               specification {
+    //                 commerce {
+    //                   pricing {
+    //                     amount
+    //                   }
+    //                 }
+    //               }
+    //               media {
+    //                 id
+    //                 asset {
+    //                   id
+    //                   url
+    //                 }
+    //                 tags
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
+    //     `,
+    //   }),
+    // });
+    // const data = await response.json();
+    // return (this.products = data);
   }
   render() {
     return (
