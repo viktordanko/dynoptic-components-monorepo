@@ -28,6 +28,7 @@
     "graphql-request": "^4.0.0"
   },
   "devDependencies": {
+    "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",

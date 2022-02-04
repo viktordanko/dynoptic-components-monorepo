@@ -6,51 +6,53 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface DynoProductItem {
+        "href": string;
+        "label": string;
+    }
     interface DynoProductList {
         "name": string;
         "products": any;
-        "response": any;
-    }
-    interface MyComponent {
     }
 }
 declare global {
+    interface HTMLDynoProductItemElement extends Components.DynoProductItem, HTMLStencilElement {
+    }
+    var HTMLDynoProductItemElement: {
+        prototype: HTMLDynoProductItemElement;
+        new (): HTMLDynoProductItemElement;
+    };
     interface HTMLDynoProductListElement extends Components.DynoProductList, HTMLStencilElement {
     }
     var HTMLDynoProductListElement: {
         prototype: HTMLDynoProductListElement;
         new (): HTMLDynoProductListElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLElementTagNameMap {
+        "dyno-product-item": HTMLDynoProductItemElement;
         "dyno-product-list": HTMLDynoProductListElement;
-        "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
+    interface DynoProductItem {
+        "href"?: string;
+        "label"?: string;
+    }
     interface DynoProductList {
         "name"?: string;
         "products"?: any;
-        "response"?: any;
-    }
-    interface MyComponent {
     }
     interface IntrinsicElements {
+        "dyno-product-item": DynoProductItem;
         "dyno-product-list": DynoProductList;
-        "my-component": MyComponent;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "dyno-product-item": LocalJSX.DynoProductItem & JSXBase.HTMLAttributes<HTMLDynoProductItemElement>;
             "dyno-product-list": LocalJSX.DynoProductList & JSXBase.HTMLAttributes<HTMLDynoProductListElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
 }

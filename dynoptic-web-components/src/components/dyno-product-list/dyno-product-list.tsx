@@ -1,97 +1,43 @@
-import { Component, Fragment, h, Prop } from '@stencil/core';
-import { request, gql } from 'graphql-request';
-
-const LIST_ALL_PRODUCTS_QUERY = gql`
-  query ListAllProducts {
-    listAllProducts {
-      tenants {
-        products {
-          id
-          specification {
-            commerce {
-              pricing {
-                amount
-              }
-            }
-          }
-          media {
-            id
-            asset {
-              id
-              url
-            }
-            tags
-          }
-        }
-      }
-    }
-  }
-`;
+import { Component, h, Host, Prop } from '@stencil/core';
+import { client } from '../../api/client';
+import { Assortments } from '../../api/queries';
 
 @Component({
   tag: 'dyno-product-list',
-  styleUrl: './dyno-product-list.css',
+  styleUrl: './dyno-product-list.scss',
   scoped: true,
 })
 export class DynoProductList {
   @Prop() name: string;
-  @Prop() products: any;
-  @Prop() response: any;
+  @Prop({ mutable: true }) products: any;
 
-  async componentWillLoad() {
-    request('https://dev.dynoptic.shop/api/graphql', LIST_ALL_PRODUCTS_QUERY).then(data => {
-      console.log(data);
-    });
-    // const url = process.env.API_URL;
-    // const response = await fetch(url, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     query: `
-    //       query ListProducts {
-    //         listAllProducts {
-    //           tenants {
-    //             products {
-    //               id
-    //               specification {
-    //                 commerce {
-    //                   pricing {
-    //                     amount
-    //                   }
-    //                 }
-    //               }
-    //               media {
-    //                 id
-    //                 asset {
-    //                   id
-    //                   url
-    //                 }
-    //                 tags
-    //               }
-    //             }
-    //           }
-    //         }
-    //       }
-    //     `,
-    //   }),
-    // });
-    // const data = await response.json();
-    // return (this.products = data);
+  componentWillLoad() {
+    try {
+      client.request(Assortments).then(data => {
+        this.products = data.assortments || [];
+      });
+    } catch (error) {
+      console.error(JSON.stringify(error, null, 2));
+    }
+    return this.products;
   }
+
   render() {
     return (
-      <Fragment>
+      <Host>
         <h2>{this.name}</h2>
-        {this.products && (
-          <ul>
-            {this.products.data.products.map(product => {
-              return <li>{product.texts.title}</li>;
+        {this.products ? (
+          <div class="product-list__list">
+            {this.products.map(product => {
+              return (
+                <div class="product-list__item">
+                  <dyno-product-item href={product.texts.slug} label={product.texts.title} />
+                </div>
+              );
             })}
-          </ul>
-        )}
-      </Fragment>
+          </div>
+        ) : null}
+      </Host>
     );
   }
 }

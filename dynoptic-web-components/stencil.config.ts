@@ -1,5 +1,6 @@
 import { Config } from '@stencil/core';
 import { reactOutputTarget } from '@stencil/react-output-target';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'dynoptic',
@@ -23,5 +24,10 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
+  ],
+  plugins: [
+    sass({
+      injectGlobalPaths: ['src/global/global.scss'],
+    }),
   ],
 };
