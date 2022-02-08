@@ -8,6 +8,16 @@ img {
   object-fit: cover;
 }
 
+.product-list {
+  max-width: 1000px;
+  margin: 0 auto;
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px;
+  }
+}
+
 .img-holder {
   position: relative;
   &::before {

@@ -3,10 +3,10 @@ import { Component, h, Host, Prop } from '@stencil/core';
 @Component({
   tag: 'dyno-product-item',
   styleUrl: './dyno-product-item.scss',
-  shadow: true,
+  scoped: true,
 })
 export class ProductItem {
-  @Prop() href: string;
+  @Prop() slug: string;
   @Prop() label: string;
 
   render() {
@@ -17,7 +17,7 @@ export class ProductItem {
             <img src="https://dev.dynoptic.shop/_next/image?url=%2Fstatic%2Fimg%2Fsun-glass-placeholder.jpeg&w=3840&q=100" alt="" width={200} height={120} />
           </div>
           <h3>
-            <a href={this.href} class="link-mask">
+            <a href={`https://dev.dynoptic.shop/en/shop/${this.slug}`} class="link-mask">
               {this.label}
             </a>
           </h3>

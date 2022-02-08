@@ -7,12 +7,26 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface DynoProductItem {
-        "href": string;
         "label": string;
+        "slug": string;
     }
     interface DynoProductList {
+        "data": any;
         "name": string;
-        "products": any;
+        "query": any;
+        "tenant": string;
+    }
+    interface DynoProductListById {
+        "data": any;
+        "name": string;
+        "tenant": string;
+        "variables": any;
+    }
+    interface DynoProductListByName {
+        "data": any;
+        "name": string;
+        "tenant": string;
+        "variables": any;
     }
 }
 declare global {
@@ -28,23 +42,53 @@ declare global {
         prototype: HTMLDynoProductListElement;
         new (): HTMLDynoProductListElement;
     };
+    interface HTMLDynoProductListByIdElement extends Components.DynoProductListById, HTMLStencilElement {
+    }
+    var HTMLDynoProductListByIdElement: {
+        prototype: HTMLDynoProductListByIdElement;
+        new (): HTMLDynoProductListByIdElement;
+    };
+    interface HTMLDynoProductListByNameElement extends Components.DynoProductListByName, HTMLStencilElement {
+    }
+    var HTMLDynoProductListByNameElement: {
+        prototype: HTMLDynoProductListByNameElement;
+        new (): HTMLDynoProductListByNameElement;
+    };
     interface HTMLElementTagNameMap {
         "dyno-product-item": HTMLDynoProductItemElement;
         "dyno-product-list": HTMLDynoProductListElement;
+        "dyno-product-list-by-id": HTMLDynoProductListByIdElement;
+        "dyno-product-list-by-name": HTMLDynoProductListByNameElement;
     }
 }
 declare namespace LocalJSX {
     interface DynoProductItem {
-        "href"?: string;
         "label"?: string;
+        "slug"?: string;
     }
     interface DynoProductList {
+        "data"?: any;
         "name"?: string;
-        "products"?: any;
+        "query"?: any;
+        "tenant"?: string;
+    }
+    interface DynoProductListById {
+        "data"?: any;
+        "name"?: string;
+        "tenant"?: string;
+        "variables"?: any;
+    }
+    interface DynoProductListByName {
+        "data"?: any;
+        "name"?: string;
+        "tenant"?: string;
+        "variables"?: any;
     }
     interface IntrinsicElements {
         "dyno-product-item": DynoProductItem;
         "dyno-product-list": DynoProductList;
+        "dyno-product-list-by-id": DynoProductListById;
+        "dyno-product-list-by-name": DynoProductListByName;
     }
 }
 export { LocalJSX as JSX };
@@ -53,6 +97,8 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "dyno-product-item": LocalJSX.DynoProductItem & JSXBase.HTMLAttributes<HTMLDynoProductItemElement>;
             "dyno-product-list": LocalJSX.DynoProductList & JSXBase.HTMLAttributes<HTMLDynoProductListElement>;
+            "dyno-product-list-by-id": LocalJSX.DynoProductListById & JSXBase.HTMLAttributes<HTMLDynoProductListByIdElement>;
+            "dyno-product-list-by-name": LocalJSX.DynoProductListByName & JSXBase.HTMLAttributes<HTMLDynoProductListByNameElement>;
         }
     }
 }

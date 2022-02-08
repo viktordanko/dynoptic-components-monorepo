@@ -7,10 +7,12 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type     | Default     |
-| ---------- | ---------- | ----------- | -------- | ----------- |
-| `name`     | `name`     |             | `string` | `undefined` |
-| `products` | `products` |             | `any`    | `undefined` |
+| Property | Attribute | Description | Type     | Default            |
+| -------- | --------- | ----------- | -------- | ------------------ |
+| `data`   | `data`    |             | `any`    | `undefined`        |
+| `name`   | `name`    |             | `string` | `undefined`        |
+| `query`  | `query`   |             | `any`    | `LIST_ASSORTMENTS` |
+| `tenant` | `tenant`  |             | `string` | `'dev'`            |
 
 
 ## Dependencies

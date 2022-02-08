@@ -6,9 +6,12 @@
     <title>Dyno</title>
 
     <script type="module" src="/build/dynoptic.esm.js"></script>
-    <script nomodule src="/build/dyno-product-list.entry.js"></script>
   </head>
   <body>
-    <dyno-product-list name="Categories"></dyno-product-list>
+    <dyno-product-list name="Aassortments"></dyno-product-list>
+
+    <dyno-product-list-by-id name="Get product list by ID" variables='{"assortmentId": "dfd9c72e-d488-4a2c-bb85-0993c017bf7f"}'></dyno-product-list-by-id>
+
+    <dyno-product-list-by-name name="Get product list by name" variables='{"queryString": "Augentropfen"}'></dyno-product-list-by-name>
   </body>
 </html>
